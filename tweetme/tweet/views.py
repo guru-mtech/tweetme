@@ -27,7 +27,7 @@ def tweet_list(request,*args,**kwargs):
     allTweets = [{"id" : item.id,"content" : item.contant} for item in querySet]
 
     data = {
-        "responce" : allTweets,
+        "response" : allTweets,
         "status": 200,
     }
 
