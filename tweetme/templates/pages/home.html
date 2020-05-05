@@ -11,10 +11,20 @@
 
     <title>Tweet me</title>
   </head>
-  <body>
 
-      {% block content %}
-      {% endblock content %}
+  <style>
+    .bg-tweetme {
+      background-color: #be1f1f !important;
+    }
+  </style>
+  <body>
+      {% include "components/navBar.html" %}
+
+       
+       <div class='container'>
+         {% block content %}
+         {% endblock content %}
+      </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -24,15 +34,25 @@
 </html>
 
 
-<div id='tweets'>prepare me</div>
-
 <script>
+
+  function handleDidLike(tweet_id,currentCount){
+    console.log(tweet_id,currentCount);
+    return currentCount += 1
+  }
+    function likeButon(tweet){
+      return "<button class='btn btn-primary btn-sm' onclick='handleDidLike("+tweet.id+","+tweet.likes+")'>"+ tweet.likes +" Likes </button>"
+    }
 
     function get_formattedString(tweet)
     {
-        var formattedString = "<div class = 'mb-4 tweet-' id='tweet-'"+tweet.id+">"+"<h3>" + tweet.id + "</h1>" + "<p>" + tweet.content + "</p></div>"
+        var formattedString = "<div class = 'col-12 col-md-10 mx-auto border rounded py-3 mb-4 tweet' id=tweet-"+tweet.id+">"+ "<p>" + tweet.content + "</p>"+
+        "<div class=btn-group>"+likeButon(tweet)+"</div></div>"
+        "</div>"
         return formattedString
     }
+
+    
   const ListVw = document.getElementById('tweets')
   ListVw.innerHTML = "loading ..."
   const xhr = new XMLHttpRequest()

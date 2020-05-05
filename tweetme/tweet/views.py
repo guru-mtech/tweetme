@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-
+import random
 from .models import Tweet
 # to render HomePage
 def home_page(request , *args , **kwargs):
@@ -24,7 +24,7 @@ def tweet_detial_view(request , tweet_id ,*args , **kwards):
 def tweet_list(request,*args,**kwargs): 
     querySet = Tweet.objects.all()
 
-    allTweets = [{"id" : item.id,"content" : item.contant} for item in querySet]
+    allTweets = [{"id" : item.id,"content" : item.contant,"likes" : random.randint(0,1000)} for item in querySet]
 
     data = {
         "response" : allTweets,
